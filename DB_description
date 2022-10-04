@@ -1,0 +1,46 @@
+The project is database which is based on popular site booking.com
+
+I. DB consists of 10 tables like as:
+
+	1)  Users  	(id, name, created_at) 
+
+# users like as unit
+
+	2)  Profiles  	(id, user_id, name, birthday, email, phone_numb, address, status, total_num_of_orders, cur_orders, prof_image) 
+
+# General information about user
+
+	3)  Hotels 	(id, name, address, general_mark, total_place_num, free_place, orders, hotel_image)	
+
+# General information about hotels
+
+	4)  Apartments	(id, hotel_id, num_of_people, price, is_taken, apart_image) 
+
+# Apartments in the hotel and their status
+
+	5)  Orders 	(id, user_id, hotel_id, order_status, apart_id, created_at, date_of_end) 
+
+# Orders made by users
+
+	6)  Reviews	(id, user_id, hotel_id, apart_id, order_id, review, grade, created_at) 
+
+# Reviews on the orders
+
+	7)  Places	(id, name, type, avrg_price, grade, address, place_image) 
+
+# Place like as cafe, museum, park, market and other same attraction
+
+	8)  Media	(id, group, meta_data) 
+
+# Photos of user profile, hotel, ...
+
+	9)  Admins	(id, user_id, hotel_id) 
+
+# Admins of hotel (he is also user)
+
+	10) Messages	(id, from_user_id, to_user_id, created_at, message) 
+
+# Messages between users and admins, NOT between users
+
+
+
