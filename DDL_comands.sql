@@ -109,7 +109,54 @@ FROM admins
 WHERE age > 25 and tbl1.gender = 'f'
 ORDER BY age;
 
+-- 2. INSERT 
 
+-- task1 : Add 10 users
 
+INSERT IGNORE users (name, password_hash)
+VALUES
+	('Alexander Sizov', '2141wdawdo12bifbhio1'),
+	('Anton Podgorny', '2141bdawdawd2bifbhio1'),
+	('Angelina Smirnova', '2141bdawdo12bifbhio1'),
+	('Alexey Kurochkin', '214323212bifbhio1'),
+	('Olga Alexandrova', '2141bdisesvebifbhio1'),
+	('Alexander Asriyan', '2141bdirsgsbifbhio1'),
+	('Anastasia Cherbakova', '2141bdiofyjfftnbifbhio1'),
+	('Evgeny Akhmedov', '2141bdio12biftjhio1'),
+	('Sergey Belov', '2141bdio12bif23sio1'),
+	('Konstantin Bezdetny', '2141bd1dae12bifbhio1')
+;
 
+SELECT * FROM users;
 
+-- 3. UPDATE 
+
+-- task1 : update birthday of users order to age will become > = 18 | Do it with transaction
+
+START TRANSACTION;
+SAVEPOINT not_updates;
+
+UPDATE IGNORE profiles
+SET birthday = DATE_SUB(CURRENT_DATE, INTERVAL 18 YEAR)
+WHERE TIMESTAMPDIFF(YEAR, birthday, CURRENT_DATE) < 18;
+
+SELECT * FROM profiles;
+
+COMMIT;
+
+-- 4. DELETE 
+
+-- task1 : delete orders where user_id or hotel_id is NULL | Do it with transactionn
+
+START TRANSACTION;
+SAVEPOINT nothing_deleted;
+
+SELECT * FROM orders WHERE user_id IS NULL OR hotel_id IS NULL;
+
+DELETE IGNORE FROM orders 
+WHERE user_id IS NULL OR hotel_id IS NULL;
+
+SELECT * FROM orders WHERE user_id IS NULL OR hotel_id IS NULL;
+
+# ROLLBACK nothing_deleted;
+COMMIT;
